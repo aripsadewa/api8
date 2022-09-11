@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -26,3 +27,11 @@ Route::post('register',RegisterController::class);
 Route::post('login',[LoginController::class,'login']);
 Route::post('logout',LogoutController::class);
 Route::get('user',[UserController::class,'index']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('create-new-article',[ArticleController::class,'store']);
+});
+
+Route::get('articles/{article:slug}',[ArticleController::class,'show']);
+Route::get('articles',[ArticleController::class,'index']);
+
