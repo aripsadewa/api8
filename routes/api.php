@@ -31,6 +31,7 @@ Route::get('user', [UserController::class, 'index']);
 Route::middleware('auth:api')->group(function () {
     Route::post('articles', [ArticleController::class, 'store']);
     Route::patch('articles/{article:slug}', [ArticleController::class, 'update']);
+    Route::delete('articles/{article:slug}', [ArticleController::class, 'destroy']);
 });
 
 Route::get('articles/{article:slug}', [ArticleController::class, 'show']);
