@@ -23,15 +23,15 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('register',RegisterController::class);
-Route::post('login',[LoginController::class,'login']);
-Route::post('logout',LogoutController::class);
-Route::get('user',[UserController::class,'index']);
+Route::post('register', RegisterController::class);
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', LogoutController::class);
+Route::get('user', [UserController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('create-new-article',[ArticleController::class,'store']);
+    Route::post('articles', [ArticleController::class, 'store']);
+    Route::patch('articles/{article:slug}', [ArticleController::class, 'update']);
 });
 
-Route::get('articles/{article:slug}',[ArticleController::class,'show']);
-Route::get('articles',[ArticleController::class,'index']);
-
+Route::get('articles/{article:slug}', [ArticleController::class, 'show']);
+Route::get('articles', [ArticleController::class, 'index']);
